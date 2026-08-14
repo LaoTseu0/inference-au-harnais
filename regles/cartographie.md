@@ -461,10 +461,11 @@ registre, puis simuler un changement de description et une coupure.
 
 *La pièce : retrouver des sources pertinentes avant de produire une réponse.*
 
-- **7.1 · `ingestion`** — Ingérer des documents réels
+- **7.1 · `ingestion`** — Ingérer et maintenir
   - source, document, fragment, provenance
   - parsing, nettoyage
   - documents structurés, pages, tableaux, code
+  - fraîcheur, suppression, réindexation
 - **7.2 · `chunking`** — Découper un document
   - chunking fixe, sémantique et structurel
   - recouvrement, contexte parent
@@ -484,14 +485,12 @@ registre, puis simuler un changement de description et une coupure.
 - **7.7 · `pipeline-rag`** — Retrouver, composer, répondre
   - pipeline RAG
   - citations, rattachement de chaque affirmation à une source
-- **7.8 · `fraicheur-index`** — Maintenir un index
-  - fraîcheur, suppression, réindexation
-- **7.9 · `graphes-multi-hop`** — Au-delà du top-k
+- **7.8 · `graphes-multi-hop`** — Au-delà du top-k
   - GraphRAG, parcours multi-hop
-- **7.10 · `evaluer-retrieval`** — Mesurer la récupération
+- **7.9 · `evaluer-retrieval`** — Mesurer la récupération
   - rappel, précision, MRR, nDCG, fidélité, pertinence
   - séparation entre évaluation du retrieval et de la génération
-- **7.11 · `rag-ou-autre`** — Quand ne pas faire de RAG
+- **7.10 · `rag-ou-autre`** — Quand ne pas faire de RAG
   - RAG contre contexte direct, outil ou fine-tuning
 
 **Reconstruction** — un petit index lexical puis vectoriel sans framework RAG,
@@ -655,42 +654,40 @@ perdre la position ni répéter aveuglément les effets.*
   - état éphémère contre état durable
   - schéma typé, sérialisation sûre
   - version de schéma et migration
-- **11.3 · `etat-de-controle`** — Où en est l'exécution
-  - étape acquise, prochaine étape
-  - statuts d'une tâche
-- **11.4 · `checkpoints`** — Poser un checkpoint
+  - état de contrôle : étape acquise, prochaine étape, statuts d'une tâche
+- **11.3 · `checkpoints`** — Poser un checkpoint
   - snapshot contre journal d'événements
   - frontière cohérente, fréquence et coût
   - écritures intermédiaires d'une branche parallèle
   - état et checkpoint dans une trace
-- **11.5 · `interruption-reprise`** — Attendre sans rester vivant
+- **11.4 · `interruption-reprise`** — Attendre sans rester vivant
   - interruption, attente d'une approbation
   - pause sans conserver le processus vivant
   - reprise depuis le dernier checkpoint
-- **11.6 · `retry-replay`** — Retry et replay
+- **11.5 · `retry-replay`** — Retry et replay
   - retry d'une opération en échec
   - replay déterministe, enregistrement des résultats non déterministes
   - eval de reprise après panne
-- **11.7 · `fork-time-travel`** — Explorer une autre trajectoire
+- **11.6 · `fork-time-travel`** — Explorer une autre trajectoire
   - fork depuis un checkpoint antérieur
   - time travel pour le diagnostic
-- **11.8 · `activites-effets`** — Ce qui ne se rejoue pas
+- **11.7 · `activites-effets`** — Ce qui ne se rejoue pas
   - appel modèle et appel outil comme activités
   - `at-least-once`, `at-most-once`
   - absence de garantie générale « exactly once »
-- **11.9 · `idempotence-effets`** — Un effet, une fois
+- **11.8 · `idempotence-effets`** — Un effet, une fois
   - clé d'idempotence
   - journal d'effets, inbox et outbox
   - résultat inconnu après coupure, compensation
-- **11.10 · `planification-workers`** — Avancer sans requête
+- **11.9 · `planification-workers`** — Avancer sans requête
   - timer durable, échéance, tâche planifiée
   - worker, file, lease, récupération d'un travail abandonné
   - concurrence sur un même workflow
-- **11.11 · `exploitation-etat`** — Vivre avec un état durable
+- **11.10 · `exploitation-etat`** — Vivre avec un état durable
   - déploiement d'une nouvelle version avec workflows ouverts
   - approbation expirée, revalidation de l'autorité
   - rétention, chiffrement, suppression
-- **11.12 · `moteurs-durables`** — Confronter des moteurs
+- **11.11 · `moteurs-durables`** — Confronter des moteurs
   - SQLite pour la reconstruction locale
   - Temporal, Restate, DBOS, Prefect
 
