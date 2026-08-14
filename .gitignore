@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Sorties de build
+build/
+dist/
+
+# Obsidian : état local du coffre
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Système
+Thumbs.db
+desktop.ini
+.DS_Store
