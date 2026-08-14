@@ -1,0 +1,77 @@
+# Configuration Obsidian du coffre
+#
+# Trace documentaire uniquement : `.obsidian/` est ignore par git (etat local,
+# plugins compilees, binaires ~2 Mo). Ce fichier sert a retrouver la config
+# utilisee et a la reconstituer sur une autre machine ; il n'est lu par aucun
+# outil.
+#
+# Releve le 2026-08-14.
+
+coffre:
+  # Le coffre Obsidian est la racine du depot.
+  racine: .
+  # Affiche les fichiers que Obsidian ne sait pas rendre (.py, .json, etc.).
+  showUnsupportedFiles: true
+
+apparence:
+  theme: Soft Paper
+  theme_version: 1.2.2
+  theme_auteur: Nick Milo
+  theme_url: https://linkingyourthinking.com
+
+plugins_communautaires:
+  - id: termy
+    nom: Termy
+    version: 1.4.1
+    auteur: ZyphrZero
+    url: https://github.com/ZyphrZero
+    minAppVersion: 1.8.7
+    desktopOnly: true
+    description: >-
+      Emulateur de terminal (panneaux divises, workflows reutilisables,
+      passage de contexte aux CLI d'IA). Base sur xterm.js avec un backend
+      PTY Rust embarque.
+    # Binaire telecharge par le plugin, jamais versionne.
+    backend: termy-server-win32-x64.exe (1.4.1, 856 576 octets)
+    # Voir aussi .agents/skills/termy-obsidian-context/ (skill generee par Termy).
+
+plugins_natifs:
+  actives:
+    - backlink
+    - bases
+    - bookmarks
+    - canvas
+    - command-palette
+    - daily-notes
+    - editor-status
+    - file-explorer
+    - file-recovery
+    - global-search
+    - graph
+    - note-composer
+    - outgoing-link
+    - outline
+    - page-preview
+    - properties
+    - switcher
+    - sync
+    - tag-pane
+    - templates
+    - word-count
+  desactives:
+    - audio-recorder
+    - footnotes
+    - markdown-importer
+    - publish
+    - random-note
+    - slash-command
+    - slides
+    - webviewer
+    - workspaces
+    - zk-prefixer
+
+palette_de_commandes:
+  epinglees:
+    - termy:open-terminal
+    - termy:terminal-split-vertical
+    - termy:terminal-split-horizontal

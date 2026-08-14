@@ -10,9 +10,11 @@ venv/
 build/
 dist/
 
-# Obsidian : état local du coffre
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
+# Obsidian : config locale du coffre (voir obsidian.yaml pour la trace)
+.obsidian/
+
+# Claude Code : worktrees et état de session
+.claude/
 
 # Système
 Thumbs.db
