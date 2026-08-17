@@ -1,8 +1,7 @@
 # Cartographie du cours
 
-> Comprendre puis reconstruire les mécanismes qui relient un modèle de langage à
-> un assistant agentique local. Chaque Parcours dépose une pièce générique dans
-> **Praxis** et fait progresser **Mnémos**, l'assistant personnel qui l'emploie.
+> Comprendre les mécanismes qui relient un modèle de langage à un harnais
+> agentique.
 
 Ce fichier fixe l'ordre de construction, la couverture du cours et la
 destination de chaque notion. Il ne fixe ni la forme d'une leçon ni les règles
@@ -38,82 +37,12 @@ Trois dépendances commandent l'ordre et méritent d'être énoncées :
 3. rien ne se sécurise avant d'exister — la sécurité consolide des frontières
    déjà construites, sans attendre le dernier Parcours pour être appliquée.
 
-## La forme d'un Parcours
-
-Chaque Parcours produit quatre résultats :
-
-1. **Mécanismes** — les concepts et leurs relations, découpés en leçons ;
-2. **Reconstruction** — une version minimale écrite ou manipulée à la main ;
-3. **Cas pratique** — une situation vérifiable sur le matériel du projet ;
-4. **Intégration** — une brique testée déposée dans Praxis, ou l'assemblage
-   explicite d'une brique déjà acquise.
-
-À partir du premier client utilisable, chaque Parcours fait aussi progresser un
-fil rouge de Mnémos. Le produit ne doit pas attendre le dernier Parcours pour
-commencer à fonctionner.
-
 ## Frontière avec la veille
 
 Ce fichier contient les mécanismes durables. Les fonctions mouvantes d'un
 produit ou d'un protocole vivent dans la veille. Une nouveauté ne devient une
 leçon que si elle modifie un mécanisme, un contrat, une garantie, une menace ou
 une décision mesurable.
-
----
-
-## Préambule · Python pour construire Praxis
-
-*La pièce : le langage et l'outillage nécessaires au reste du parcours.*
-
-Ce Préambule ne reprend pas les bases communes à tous les langages. Il traduit
-vers Python les compétences d'un développeur JavaScript ou Java.
-
-- **P.1 · `py-environnements-dependances`** — Environnements et dépendances
-  - environnement virtuel, `pyproject.toml`
-  - résolution des dépendances, packaging
-- **P.2 · `py-modules-packages-imports`** — Modules, packages et imports
-  - modules, packages, mécanique d'import
-  - layout `src/`
-- **P.3 · `py-objets-contrats-types`** — Modéliser des contrats
-  - objets, `dataclass`, composition, protocoles structurels
-  - annotations de types, génériques, unions
-- **P.4 · `py-validation-donnees`** — Valider les données
-  - validation à la frontière, Pydantic
-  - coercition et refus
-- **P.5 · `py-exceptions-erreurs`** — Représenter les échecs
-  - exceptions, chaînage des causes
-  - taxonomie d'erreurs
-- **P.6 · `py-iterateurs-generateurs`** — Produire un flux paresseux
-  - itérateurs, générateurs
-  - progression à la demande
-- **P.7 · `py-coroutines-taches`** — Coroutines et tâches
-  - `async`, `await`, tâches
-  - ordonnancement coopératif
-- **P.8 · `py-iterateurs-asynchrones`** — Flux asynchrones
-  - itérateurs et générateurs asynchrones
-- **P.9 · `py-annulation`** — Annuler sans masquer
-  - réception, propagation et limites de l'annulation
-- **P.10 · `py-context-managers`** — Durée de vie des ressources
-  - context managers synchrones et asynchrones
-  - nettoyage garanti
-- **P.11 · `py-configuration-secrets`** — Configurer sans état global
-  - configuration, variables d'environnement, secrets
-- **P.12 · `py-tests`** — Tester les frontières
-  - pytest, fixtures, doubles de test
-  - tests asynchrones
-- **P.13 · `py-logs-structures`** — Produire des logs structurés
-  - événement de log, contexte, corrélation
-- **P.14 · `py-serialisation-schemas`** — Sérialiser des contrats durables
-  - formats sérialisables
-  - version de schéma, compatibilité
-
-**Reconstruction** — un pipeline asynchrone typé qui produit, transforme et
-annule un flux d'événements.
-
-**Cas pratique** — empaqueter ce pipeline, le configurer sans constante globale
-et le tester sans dépendre du réseau.
-
-**Intégration** — `contracts`, `config` et l'infrastructure de tests de Praxis.
 
 ---
 
@@ -175,15 +104,6 @@ pour le prochain token.*
   - limite de contexte, croissance du coût
   - frontière de la mesure
 
-**Reconstruction** — suivre une entrée dans un petit modèle, observer les logits,
-puis écrire le sampler et la condition d'arrêt.
-
-**Cas pratique** — déformer une même distribution réglage par réglage, puis
-reproduire une génération sous un environnement fixé.
-
-**Intégration** — `generation` : tokenisation, Templates, comptage, sampling et
-boucle autorégressive bornée.
-
 ---
 
 ## 1 · L'inférence locale
@@ -223,15 +143,6 @@ boucle autorégressive bornée.
   - quantification, distillation, LoRA
   - frontière avec le RAG
 
-**Reconstruction** — calculer le budget mémoire d'un modèle, observer prefill et
-decode, puis relier chaque métrique au mécanisme correspondant.
-
-**Cas pratique** — servir le même modèle avec deux runtimes sous une charge
-identique et expliquer les différences mesurées.
-
-**Intégration** — `inference` : description d'un runtime local, inventaire de ses
-capacités, protocole de benchmark.
-
 ---
 
 ## 2 · Transport, modèles et providers
@@ -269,15 +180,6 @@ capacités, protocole de benchmark.
   - génération, embeddings, reranking, STT, TTS, vision
   - adaptateurs distincts pour le runtime local et le service cloud
 
-**Reconstruction** — écrire un client streaming sans SDK et rendre chaque
-événement observable.
-
-**Cas pratique** — employer successivement un endpoint natif, un endpoint
-compatible et une API cloud, puis provoquer timeout, 429 et coupure de flux.
-
-**Intégration** — `models` et `client` : contrats canoniques, adaptateurs,
-streaming, taxonomie d'erreurs.
-
 ---
 
 ## 3 · Conversation, session et context engineering
@@ -311,15 +213,6 @@ streaming, taxonomie d'erreurs.
 - **3.9 · `persistance-session`** — Persister, migrer, supprimer
   - stockage d'une session, format, version et migration
   - suppression, rétention, export
-
-**Reconstruction** — séparer un journal de session de la fonction qui compose le
-prochain contexte.
-
-**Cas pratique** — maintenir une conversation longue, redémarrer le processus,
-inspecter exactement les tokens envoyés après reprise.
-
-**Intégration** — `context` et `sessions` : composition, budget, compaction,
-persistance conversationnelle.
 
 ---
 
@@ -355,15 +248,6 @@ persistance conversationnelle.
   - génération et sélection de candidats
 - **4.9 · `evaluer-un-prompt`** — Prouver qu'un prompt est meilleur
   - protocole d'évaluation d'une modification de prompt
-
-**Reconstruction** — contraindre à la main les tokens autorisés pour une petite
-grammaire, puis valider un invariant que la grammaire ne peut pas exprimer.
-
-**Cas pratique** — produire le même objet par prompt seul, par validation avec
-retry et par décodage contraint, puis comparer validité, contenu et coût.
-
-**Intégration** — `control` : Templates, contraintes, validation, stratégie de
-réparation.
 
 ---
 
@@ -403,14 +287,6 @@ réparation.
   - compensation lorsqu'un effet ne peut pas être annulé
   - journal d'audit
 
-**Reconstruction** — un registre, un dispatcher et une politique qui séparent
-proposition, autorisation, exécution et résultat.
-
-**Cas pratique** — lire l'état d'un service du homelab, proposer une
-modification, attendre l'approbation, exécuter, vérifier l'effet.
-
-**Intégration** — `tools`, `permissions` et `approvals`.
-
 ---
 
 ## 6 · MCP
@@ -446,14 +322,6 @@ le runtime de l'agent.*
   - serveur tiers, injection indirecte par une ressource ou un résultat
   - tool poisoning par la description, rug pull après approbation
   - validation, filtrage et approbation côté host
-
-**Reconstruction** — un serveur et un client minimaux, handshake, `tools/list` et
-`tools/call` compris.
-
-**Cas pratique** — exposer un outil natif en MCP, le consommer par le même
-registre, puis simuler un changement de description et une coupure.
-
-**Intégration** — `mcp` : client, serveur minimal, adaptateur vers `tools`.
 
 ---
 
@@ -492,15 +360,6 @@ registre, puis simuler un changement de description et une coupure.
   - séparation entre évaluation du retrieval et de la génération
 - **7.10 · `rag-ou-autre`** — Quand ne pas faire de RAG
   - RAG contre contexte direct, outil ou fine-tuning
-
-**Reconstruction** — un petit index lexical puis vectoriel sans framework RAG,
-une fusion des résultats, une mesure de la récupération.
-
-**Cas pratique** — interroger la documentation réelle du homelab avec citations,
-puis diagnostiquer séparément une mauvaise récupération et une mauvaise réponse.
-
-**Intégration** — `knowledge` et `retrieval` : ingestion, index, recherche,
-reranking, provenance.
 
 ---
 
@@ -541,15 +400,6 @@ confondre avec l'état d'un workflow.*
   - évaluation de l'écriture, du rappel
   - influence réelle sur la réponse
 
-**Reconstruction** — des contrats distincts pour un épisode, un fait et une
-procédure, avec la trace de leur écriture et de leur rappel.
-
-**Cas pratique** — apprendre une préférence, enregistrer un événement daté,
-corriger un fait devenu faux, prouver que l'ancienne version n'est plus utilisée.
-
-**Intégration** — `memory` : politiques d'écriture, stores spécialisés,
-provenance, rappel, consolidation, oubli.
-
 ---
 
 ## 9 · La boucle mono-agent
@@ -583,14 +433,6 @@ provenance, rappel, consolidation, oubli.
 - **9.9 · `declenchement`** — Ce qui démarre un run
   - déclenchement par requête, événement ou horaire
   - limite d'une boucle vivant seulement en mémoire du processus
-
-**Reconstruction** — la boucle comme machine à états éphémère dont chaque
-transition produit un événement inspectable.
-
-**Cas pratique** — exécuter une tâche multi-étapes bornée, provoquer plusieurs
-catégories d'erreurs, vérifier la condition d'arrêt.
-
-**Intégration** — `loop` : runner mono-agent, budgets, transitions, hooks.
 
 ---
 
@@ -630,14 +472,6 @@ se diagnostiquent pas sans trace ni rejeu.
   - comparaison de modèle, prompt, outil et architecture
   - diagnostic avant fine-tuning
   - alertes, tableaux de bord, SLO personnels
-
-**Reconstruction** — un format de trace indépendant d'un fournisseur, puis une
-eval calculée à partir d'événements rejoués.
-
-**Cas pratique** — retrouver la première décision fautive d'une trajectoire et
-ajouter le cas de non-régression correspondant.
-
-**Intégration** — `telemetry`, `evals` et `judge`.
 
 ---
 
@@ -688,17 +522,8 @@ perdre la position ni répéter aveuglément les effets.*
   - approbation expirée, revalidation de l'autorité
   - rétention, chiffrement, suppression
 - **11.11 · `moteurs-durables`** — Confronter des moteurs
-  - SQLite pour la reconstruction locale
+  - SQLite comme socle durable minimal
   - Temporal, Restate, DBOS, Prefect
-
-**Reconstruction** — un checkpointer SQLite et un journal d'effets pour la boucle
-du Parcours 9.
-
-**Cas pratique** — arrêter le processus avant et après chaque frontière d'action,
-reprendre le workflow, démontrer qu'aucun effet confirmé n'est répété, puis
-forker un checkpoint sans modifier la trajectoire originale.
-
-**Intégration** — `state`, `checkpoints`, `workflow` et `effects`.
 
 ---
 
@@ -732,14 +557,6 @@ machine entière.*
   - hooks avant et après outil
   - installation de dépendances, nettoyage
   - audit des fichiers et des commandes
-
-**Reconstruction** — un workspace local doté d'une liste explicite de capacités,
-et une skill chargée sans placer tout son contenu dans le contexte.
-
-**Cas pratique** — faire produire un artefact par un sous-processus isolé,
-interrompre l'exécution, reprendre avec le même workspace restauré.
-
-**Intégration** — `workspace`, `sandbox`, `skills`, `artifacts` et `hooks`.
 
 ---
 
@@ -778,16 +595,6 @@ interrompre l'exécution, reprendre avec le même workspace restauré.
   - arbitrage qualité, délai, coût et confidentialité
 - **13.10 · `a2a`** — Des agents indépendants
   - A2A comme protocole de culture
-
-**Reconstruction** — deux sous-agents en parallèle avec des états privés, dont
-seuls les résultats publics fusionnent par un reducer défini.
-
-**Cas pratique** — comparer un agent équipé de plusieurs skills à un superviseur
-et plusieurs ouvriers sur les mêmes tâches, puis provoquer un conflit d'écriture
-et un échec partiel.
-
-**Intégration** — `agents`, `handoffs` et `router`, appuyés sur l'état durable du
-Parcours 11.
 
 ---
 
@@ -837,14 +644,6 @@ la sécurité : elle commence à la première frontière externe, au Parcours 2.
   - détection, révocation, réponse à incident
   - OWASP LLM et OWASP Agentic comme référentiels
 
-**Reconstruction** — tracer les flux de confiance depuis une donnée externe
-jusqu'à un outil, une mémoire et un effet durable.
-
-**Cas pratique** — attaquer Mnémos par un document, un outil MCP, une mémoire et
-une commande, puis vérifier chaque barrière et la révocation d'un état contaminé.
-
-**Intégration** — `security`, `policy` et `audit`.
-
 ---
 
 ## 15 · Voix, vision et temps réel
@@ -877,92 +676,7 @@ texte.*
   - modèle local contre service cloud
   - mode dégradé sans voix ni vision
 
-**Reconstruction** — un flux d'événements commun au texte, à l'audio et à
-l'image, qui ne perd pas le média source.
-
-**Cas pratique** — parler à Mnémos, l'interrompre pendant sa réponse, lui faire
-analyser une image, reprendre la même session après une coupure.
-
-**Intégration** — `io` et `realtime`.
-
 ---
-
-## 16 · Mnémos
-
-*La pièce : assembler sans introduire un mécanisme encore inconnu.*
-
-Ce Parcours n'ouvre aucun mécanisme neuf. Chaque décision pointe vers le
-Parcours qui l'a rendue possible.
-
-- **16.1 · `mn-identite`** — Identité et confidentialité
-  - personnalité et instructions propres à Mnémos
-  - contrats de confidentialité
-- **16.2 · `mn-topologie`** — Topologie des agents
-  - agents disponibles
-  - choix entre skills et sous-agents
-- **16.3 · `mn-modeles`** — Modèles et replis
-  - modèles locaux, replis cloud autorisés
-  - mise à jour des modèles et des dépendances
-- **16.4 · `mn-outils-homelab`** — Outils réels
-  - outils du homelab
-  - API domotique et appareils
-- **16.5 · `mn-permissions`** — Autorité
-  - matrice des permissions et des approbations
-- **16.6 · `mn-sessions-workflows`** — Continuité
-  - sessions persistantes, workflows durables
-  - état partagé explicitement limité
-- **16.7 · `mn-declencheurs`** — Déclenchement
-  - tâches déclenchées par requête, horaire ou événement
-- **16.8 · `mn-memoire`** — Mémoire personnelle
-  - sources de mémoire
-  - procédures apprises
-- **16.9 · `mn-interfaces`** — Surfaces d'usage
-  - voix, vision
-  - interface Web, mobile ou terminal
-- **16.10 · `mn-exploitation`** — Exploitation
-  - observabilité, evals, audit
-  - runbook, sauvegarde, restauration, migration
-- **16.11 · `mn-acceptation`** — Preuve d'usage
-  - mode hors ligne et modes dégradés
-  - critères d'acceptation quotidiens
-  - conversion des échecs réels en evals de non-régression
-
-Mnémos n'est ni une plateforme multi-tenant, ni un produit commercial, ni un
-prétexte pour distribuer prématurément chaque composant.
-
-**Cas pratique** — utiliser Mnémos sur des tâches réelles du homelab, conserver
-les trajectoires problématiques, fermer les régressions observées.
-
-**Intégration** — Praxis atteint sa première version stable ; Mnémos devient
-l'application qui l'éprouve chaque jour.
-
----
-
-## Les briques de Praxis
-
-Une brique est déposée à la fin du Parcours qui en ouvre les mécanismes.
-
-- **Préambule** — `contracts`, `config` : types communs, configuration, erreurs
-- **0** — `generation` : tokeniser, rendre un Template, échantillonner, arrêter
-- **1** — `inference` : décrire et mesurer un runtime local
-- **2** — `models`, `client` : contrats par capacité, transport, streaming
-- **3** — `context`, `sessions` : composer le contexte, persister les sessions
-- **4** — `control` : prompts, sorties contraintes, validation
-- **5** — `tools`, `permissions`, `approvals` : enregistrer, autoriser et
-  exécuter une action
-- **6** — `mcp` : adapter des outils et ressources distants
-- **7** — `knowledge`, `retrieval` : ingérer, rechercher, reranker, citer
-- **8** — `memory` : écrire, retrouver, consolider, oublier
-- **9** — `loop` : exécuter une boucle mono-agent bornée
-- **10** — `telemetry`, `evals`, `judge` : observer, rejouer, mesurer
-- **11** — `state`, `checkpoints`, `workflow`, `effects` : persister et reprendre
-  une exécution
-- **12** — `workspace`, `sandbox`, `skills`, `artifacts` : fournir un
-  environnement d'action isolé
-- **13** — `agents`, `handoffs`, `router` : déléguer et coordonner plusieurs
-  agents
-- **14** — `security`, `policy`, `audit` : imposer les frontières de confiance
-- **15** — `io`, `realtime` : porter la voix, la vision, les interruptions
 
 ## Veille transversale
 
