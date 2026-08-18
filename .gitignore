@@ -10,8 +10,15 @@ venv/
 build/
 dist/
 
-# Obsidian : config locale du coffre (voir obsidian.yaml pour la trace)
-.obsidian/
+# Obsidian : seule la config partagée du coffre est versionnée. L'état
+# local (workspace, fichiers récents), les plugins et leurs binaires
+# restent ignorés. Voir obsidian.yaml pour la trace des versions.
+.obsidian/*
+!.obsidian/app.json
+!.obsidian/appearance.json
+!.obsidian/command-palette.json
+!.obsidian/community-plugins.json
+!.obsidian/core-plugins.json
 
 # Claude Code : worktrees et état de session
 .claude/

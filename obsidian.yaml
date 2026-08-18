@@ -1,11 +1,13 @@
 # Configuration Obsidian du coffre
 #
-# Trace documentaire uniquement : `.obsidian/` est ignore par git (etat local,
-# plugins compilees, binaires ~2 Mo). Ce fichier sert a retrouver la config
-# utilisee et a la reconstituer sur une autre machine ; il n'est lu par aucun
+# Trace documentaire. Les cinq JSON de config (app, appearance,
+# command-palette, community-plugins, core-plugins) sont versionnes ; le
+# reste de `.obsidian/` est ignore par git (etat local, plugins compiles,
+# binaires ~2 Mo). Ce fichier sert a retrouver ce qui n'est pas versionne
+# et a le reconstituer sur une autre machine ; il n'est lu par aucun
 # outil.
 #
-# Releve le 2026-08-14.
+# Releve le 2026-08-14, revu le 2026-08-18.
 
 coffre:
   # Le coffre Obsidian est la racine du depot.
